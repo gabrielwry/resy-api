@@ -7,8 +7,8 @@ import VenuesService from "./controllers/VenuesService";
 import dayjs from "dayjs";
 import type { EnhancedSlot } from "./types/find";
 
-const email = process.env.RESY_EMAIL!;
-const password = process.env.RESY_PASSWORD!;
+const email = "{REPLACE_THIS}";
+const password = "{REPLACE_THIS";
 const service = new ResyService({
   email,
   password,
@@ -137,7 +137,8 @@ const regenerateHeaders = async () => {
   }
 };
 // every day fetch every post
-cron.scheduleJob("*/5 * * * *", refreshAvailability);
+// {REPLACE_THIS}
+cron.scheduleJob("*/2 * * * *", refreshAvailability);
 cron.scheduleJob("1 * * * *", regenerateHeaders);
 
 regenerateHeaders().then(async () => {

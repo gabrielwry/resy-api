@@ -5,7 +5,6 @@ import type { VenueResponse } from "../types/venue";
 import type { FindResponse } from "../types/find";
 import type { DetailsResponse } from "../types/details";
 import type { ReservationResponse } from "../types/reservations";
-import dayjs from "dayjs";
 import type { VenueCalendarResponse } from "../types/types";
 import type { GeoIpResponse } from "../types/types";
 import type { UserResponse } from "../types/types";
@@ -146,9 +145,9 @@ class ResyService extends BaseService {
     venue_id?: number;
   }) => {
     const opts = { ...(params || {}) };
-    opts.party_size ??= 2;
-    opts.lat ??= 0;
-    opts.long ??= 0;
+    opts.party_size = 3;
+    opts.lat = 0;
+    opts.long = 0;
     return this.get<FindResponse>(routes.search, {
       params: opts,
       headers: this.headers,
@@ -192,8 +191,9 @@ class ResyService extends BaseService {
   };
 
   getVenueCalendar = async (venueId: number, numSeats = 2) => {
-    const startDate = dayjs().format("YYYY-MM-DD");
-    const endDate = dayjs().add(1, "y").format("YYYY-MM-DD");
+    //{REPLACE_THIS}
+    const startDate = "2022-07-08";
+    const endDate = "2022-08-01";
     const params = {
       venue_id: venueId,
       num_seats: numSeats,
@@ -213,7 +213,6 @@ class ResyService extends BaseService {
     const availableDates = schedule.filter(
       (l) => l?.inventory?.reservation === "available"
     );
-
     return availableDates;
   };
 
